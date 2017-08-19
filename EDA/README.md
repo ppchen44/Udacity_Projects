@@ -232,36 +232,44 @@ summary(rw$pH)
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   2.740   3.210   3.310   3.311   3.400   4.010
 ```
+```
+grid.arrange(ggplot(rw, aes( x = 1, y = sulphates ) ) + 
+               geom_jitter(alpha = 0.1 ) +
+               geom_boxplot(alpha = 0.2, color = 'red' ) ,
+             ggplot(rw, aes( x   = sulphates  ) ) + 
+                   geom_histogram(bins=30 ),ncol=2)
+```
+![Alt text](https://user-images.githubusercontent.com/24691702/29484242-3ef05b20-846f-11e7-9412-c26f3cebe851.png)
+```
+summary(rw$sulphates)
+```
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  0.3300  0.5500  0.6200  0.6581  0.7300  2.0000
+```
 The distributions of density and PH look like look symmetrically distributed but with outliers.
 
-Univariate Analysis
+## Univariate Analysis
 
-What is the structure of your dataset?
+### What is the structure of your dataset?
 There are 1599 red wine observations in the dataset with 12 features(fixed.acidity, volatile.acidity, citric.acid, residual.sugar, chlorides, free.sulfur.dioxide, total.sulfur.dioxide, density, pH, sulphates, alcohol, quality). All variables are numerical variables.
 Important observations: . Most rea wine have quality 5, 6, and 7. . The median quality for red wine 6 and the max quality is 8. . The histograms of density and PH are approximately noraml distributed. . The distributions of free.sulfur.dioxide, total.sulfur.dioxide and alcohol are highly right skewed which have long right tail.
 
-What is/are the main feature(s) of interest in your dataset?
+### What is/are the main feature(s) of interest in your dataset?
 I have not found which one feature is the most important. But free.sulfur.dioxide and sulphates are included in total.sulfur.dioxide.
 
-What other features in the dataset do you think will help support your
-
-investigation into your feature(s) of interest?
+### What other features in the dataset do you think will help support your investigation into your feature(s) of interest?
 Fixed.acidity, volatile.acidity, citric.acid, residual.sugar, chlorides, total.sulfur.dioxide, and alcohol likely contribute to the quality of red wine.
 
-Did you create any new variables from existing variables in the dataset?
+### Did you create any new variables from existing variables in the dataset?
 I didnot create any new variable because I have not seen there is any relationship between those 12 variables.
 
-Of the features you investigated, were there any unusual distributions?
-
-Did you perform any operations on the data to tidy, adjust, or change the form
-
-of the data? If so, why did you do this?
+### Of the features you investigated, were there any unusual distributions? Did you perform any operations on the data to tidy, adjust, or change the form of the data? If so, why did you do this?
 Since the distributions of free.sulfur.dioxide and total.sulfur.dioxide are highly right skewed. I made log-transformation on those two variables. The transformed distribution of total.sulfur.dioxide is seemed approximately normal. Though the transformed distribution of free.sulfur.dioxide is not seemed approximatedly normal, some values of free.sulfur.dioxide with no count have been revealed.
 
-Bivariate Plots Section
+## Bivariate Plots Section
 From the correlation matrix, we can see that the quality are highly correlated with volatile.acidity and alcohol. Also we could see that fixed.acidity, volatile.acidity, citric.acidity, density, and pH are correlated with each other.
+
 
 From the correlation plots, fixed.acidity, citric.acid, chlorides, total.sulfur.dioxide, sulphates do not seem to have strong correlations with quality. But citric.acid is correlated with volatile.acidity.
 
