@@ -609,13 +609,17 @@ ggplot(aes(x = factor(quality), y = volatile.acidity), data = rw) +
    geom_boxplot(aes(fill = alcohol.bucket) ) +
   ggtitle('Quality by volatile.acidity and alcohol')
 ```
+![Alt text](https://user-images.githubusercontent.com/24691702/29490490-ed1ed676-84f2-11e7-8861-88be85a5b871.png)
 
 ### Description Three
 The boxplots clearly show that quality tends to be higher as volatile.acidity decreases and the alcohol increases. It indicates two opposite directions relationship between quality and volatile.acidity and between quality and alcohol. The correlation coefficient between quality and volatile.acidity is negative. The correlation coefficient between quality and alcohol is positive. Multiple regression can be used. We can interpret the relationship between quality with either volatile.acidity or alcohol by fixing another one.
 
-Reflection
+## Reflection
 The red wine dataset contains 1599 observations across 12 variables. I started by exploring individual variables in the dataset. I plotted histograms of all variables, some variables have approximately normal distribuion such as density and pH. The distribuions of free.sulfur.dioxide, total.sulfur.dioxide and alcohol are highly right skewed which have long right tail. Then I explored relationship between quality with all other variables and tried to find an appropriate model.
+
 Though there was a postively trend between quality and alcohol, the dataset suffers from overplotting. In this case, classification algorithm might be more appropriate to classify the red wine quailty. But I sitll applied linear regression for qulity, as we known, the modeling results are not very well based on the Adjusted R-squared which are not higher than 30%.
+
 After I had applied the K-Nearest Neighbors, I got the crosstable on the test dataset. For the quality equals to 6, this classification algorithm can get 88% right predictions of total number of quality is 6. But it doesn’t get a reasonable probability of right predictions among all other quality levels.
+
 After I had applied linear regression and KNN, I known that those two method are not appropriate for the red wine dataset. A more advanced classification algorithm should be used such as Random Forest.
 
