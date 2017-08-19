@@ -277,6 +277,25 @@ pairs.panels(rw[c('quality', 'fixed.acidity','volatile.acidity','citric.acid','c
 
 From the correlation plots, fixed.acidity, citric.acid, chlorides, total.sulfur.dioxide, sulphates do not seem to have strong correlations with quality. But citric.acid is correlated with volatile.acidity.
 
+```
+ggplot(aes(x = alcohol, y = quality), data =rw) +
+  geom_jitter(alpha = 0.1) +
+  geom_smooth(method = 'loess', col = 'red') +
+  geom_smooth(method = 'lm', col = 'green') 
+```
+![Alt text](https://user-images.githubusercontent.com/24691702/29484281-08dd5014-8470-11e7-8d0a-ba52ff8d66d3.png)
+```
+ggplot(aes(factor(quality), 
+            alcohol), 
+        data = rw) +
+  geom_jitter( alpha = .3)  +
+  geom_boxplot( alpha = .5,color = 'blue')+
+  stat_summary(fun.y = "mean", 
+               geom = "point", 
+               color = "red", 
+               shape = 8, 
+               size = 4)
+```
 
 This plot clearly shows that the quality increases as the mean of alcohol increases.
 ## Warning in model.response(mf, "numeric"): using type = "numeric" with a
