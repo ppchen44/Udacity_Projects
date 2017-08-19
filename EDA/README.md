@@ -86,6 +86,10 @@ summary(rw$quality)
 ```
 The distributions of fixed.acidity and volatile.acidity are skewed with right tail. Most Red wine have fixed.acidity between 6 and 9. The volatile.acidity of many red wine falls between 0.2 to 0.8. For the atribute of citric.acid of red wine, it has two peaks, one is at zero and another is 0.49.
 
+```
+qplot(x = fixed.acidity, data = rw)
+qplot(x = fixed.acidity, data = rw, binwidth = 0.1)
+```
 ![Alt text](https://user-images.githubusercontent.com/24691702/29484033-fe021e2c-846a-11e7-9bed-fa31bff1e31b.png)
 ![Alt text](https://user-images.githubusercontent.com/24691702/29484046-74796e20-846b-11e7-9927-031a92c0ec20.png)
 
@@ -96,6 +100,10 @@ summary(rw$fixed.acidity)
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    4.60    7.10    7.90    8.32    9.20   15.90
 ```
+```
+qplot(x = volatile.acidity, data = rw)
+qplot(x = volatile.acidity, data = rw, binwidth = 0.01)
+```
 ![Alt text](https://user-images.githubusercontent.com/24691702/29484071-df8704fc-846b-11e7-9e4a-b63b6d739a66.png)
 ![Alt text](https://user-images.githubusercontent.com/24691702/29484079-12877d14-846c-11e7-89ac-aaefe74a8e51.png)
 ```
@@ -105,7 +113,11 @@ summary(rw$volatile.acidity)
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  0.1200  0.3900  0.5200  0.5278  0.6400  1.5800
 ```
-
+```
+qplot(x = citric.acid, data = rw)
+qplot(x = citric.acid, data = rw, binwidth = 0.01)
+```
+![Alt text](https://user-images.githubusercontent.com/24691702/29484104-8af4775c-846c-11e7-9604-b1e23abd2188.png)
 ```
 summary(rw$citric.acid)
 ```
