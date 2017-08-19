@@ -217,9 +217,21 @@ summary(rw$density)
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  0.9901  0.9956  0.9968  0.9967  0.9978  1.0040
 ```
+```
+grid.arrange(ggplot(rw, aes( x = 1, y = pH ) ) + 
+               geom_jitter(alpha = 0.1 ) +
+               geom_boxplot(alpha = 0.2, color = 'red' ) ,
+             ggplot(rw, aes( x   = pH  ) ) + 
+                   geom_histogram(bins=30 ),ncol=2)
+```
+![Alt text](https://user-images.githubusercontent.com/24691702/29484224-00f2d0d2-846f-11e7-9220-8ffc9b5a99e0.png)
+```
+summary(rw$pH)
+```
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   2.740   3.210   3.310   3.311   3.400   4.010
-
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  0.3300  0.5500  0.6200  0.6581  0.7300  2.0000
 The distributions of density and PH look like look symmetrically distributed but with outliers.
