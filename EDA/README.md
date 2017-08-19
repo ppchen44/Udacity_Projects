@@ -313,6 +313,7 @@ ggplot(aes(x = log10(alcohol), y = quality), data = rw) +
   geom_point(alpha = 0.1, position = 'jitter')
 ```
 ![Alt text](https://user-images.githubusercontent.com/24691702/29484331-1dd82128-8471-11e7-873d-9f9bd347d535.png)
+
 Tried to fix overplotting problem, two transformations on alcohol was made. These two plots show that the overplotting cannot be easily fix only through transformations.
 
 
