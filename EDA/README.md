@@ -126,9 +126,21 @@ summary(rw$citric.acid)
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   0.000   0.090   0.260   0.271   0.420   1.000
 ```
+```
+grid.arrange(ggplot(rw, aes( x = 1, y = residual.sugar ) ) + 
+               geom_jitter(alpha = 0.1 ) +
+               geom_boxplot(alpha = 0.2, color = 'red' ) ,
+             ggplot(rw, aes( x   = residual.sugar  ) ) + 
+                   geom_histogram(bins=30 ),ncol=2)
+```
+
+```
+summary(rw$residual.sugar)
+```
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   0.900   1.900   2.200   2.539   2.600  15.500
-
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ## 0.01200 0.07000 0.07900 0.08747 0.09000 0.61100
 
