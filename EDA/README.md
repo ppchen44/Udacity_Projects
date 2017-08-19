@@ -106,9 +106,13 @@ summary(rw$volatile.acidity)
 ##  0.1200  0.3900  0.5200  0.5278  0.6400  1.5800
 ```
 
+```
+summary(rw$citric.acid)
+```
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   0.000   0.090   0.260   0.271   0.420   1.000
-
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   0.900   1.900   2.200   2.539   2.600  15.500
 
