@@ -425,7 +425,26 @@ ggplot(aes(x = alcohol,
 
 This coloful plot shows us that red wine tends to have higher quality as alcohol increases in a special range of volatile.acidity. For example, the red wine quality increases as the alcohol increases from 8 to 14 for volatile.acidity in the range of 0.4 to 0.6. The plot shows that the variations of alcohol and volatile.acidity are large for quality is 8. For quality is 3, the variations of alcohol and volatile.acidity are the greatest than other qualities.
 
+```
+ggplot(aes(x = volatile.acidity, 
+           y = citric.acid  , color = factor(quality)), 
+       data = rw) +
+      geom_point(alpha = 0.8, size = 1) +
+      geom_smooth(method = "lm", se = FALSE,size=1)  +
+  scale_color_brewer(type='seq',
+                   guide=guide_legend(title='Quality'))
+```
+![Alt text](https://user-images.githubusercontent.com/24691702/29490445-6e4159ba-84f1-11e7-8ed3-97720b51541b.png)
 This plot shows us that as volatile.acidity decreases, citric.acid decreases.
+```
+rw$quality = as.numeric(rw$quality)
+m1 <- lm(quality ~ alcohol, data = rw)
+m2 <- update(m1, ~ . + volatile.acidity)
+m3 <- update(m2, ~ . + sulphates)
+m4 <- update(m3, ~ . + citric.acid)
+mtable(m1, m2, m3, m4)
+```
+```
 ## 
 ## Calls:
 ## m1: lm(formula = quality ~ alcohol, data = rw)
@@ -460,9 +479,30 @@ This plot shows us that as volatile.acidity decreases, citric.acid decreases.
 ##   BIC                 3464.2     3273.1     3235.7     3242.4   
 ##   N                   1599       1599       1599       1599     
 ## ================================================================
+```
 Applied linear regression on this dataset. The Adjusted R-squared is not higher than 0.3, so the linear regression would not be a good model. Next, I am going to explore this dataset by using classification algorithms such as KNN.
+
+```
+rw_f = rw
+rw_f$quality = factor(rw_f$quality)
+normalize <- function(x)
+{
+  return((x - min(x))/ (max(x) - min(x)))
+}
+rw_n = as.data.frame(lapply(rw_f[1:12], normalize))
+rw_train = rw_n[1:1200, ]
+rw_test = rw_n[1211:1599, ]
+rw_train_labels = rw_f[1:1200, 13]
+rw_test_labels = rw_f[1211:1599, 13]
+rw_test_pred = knn(train = rw_train, test = rw_test, cl = rw_train_labels, k = 24)
+summary(rw_test_pred)
+CrossTable(x = rw_test_labels, y = rw_test_pred, prop.chisq = FALSE)
+```
+```
 ##   1   2   3   4   5   6 
 ##   0   0  65 316   8   0
+```
+```
 ## 
 ##  
 ##    Cell Contents
@@ -515,30 +555,30 @@ Applied linear regression on this dataset. The Adjusted R-squared is not higher 
 ## ---------------|-----------|-----------|-----------|-----------|
 ## 
 ## 
+```
 After I had applied KNN to classify the red wine quality based on training dataset, I got a crosstable of prediction and test dataset. KNN had a good probability of right predictions at quality equals to 6. The performances of KNN were terrible on all other quality levels.
 
-Multivariate Analysis
+## Multivariate Analysis
 
-Talk about some of the relationships you observed in this part of the
+### Talk about some of the relationships you observed in this part of the investigation. Were there features that strengthened each other in terms of looking at your feature(s) of interest?
 
-investigation. Were there features that strengthened each other in terms of
-
-looking at your feature(s) of interest?
 In a specifical range of volatile.acidity, the red wine quality will increase as the alcohol increasing.
 
-Were there any interesting or surprising interactions between features?
+### Were there any interesting or surprising interactions between features?
+
 Citric.acid are monotonically decreasing as volatile.acidity decreasing.
 
-OPTIONAL: Did you create any models with your dataset? Discuss the
+### OPTIONAL: Did you create any models with your dataset? Discuss the strengths and limitations of your model.
 
-strengths and limitations of your model.
 Yes, I created two models with red wine dataset. One of them is linear regression model with one variable, two variables, three variables and four variables. The other model is K-nearest algorithm for classification with k = 24. Based on Adjusted R-squared, the multiple linear regression isn’t a good model for red wine dataset. For the KNN model, the predicion on the test dataset is also not a good model. But I think it is better than multiple regression.
 
-Final Plots and Summary
+## Final Plots and Summary
 
-Plot One
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+### Plot One
 
+```
+qplot(x = quality, data = rw, main = 'Red Wine Quality', xlab = 'Quality', ylab = 'Number of Red Wines')
+```
 
 Description One
 There are almost 690 red wines have quality 5 and more than 600 red wines have quality 6. 200 red wines have quality 7. Majority red wine qualities are 5 and 6.
