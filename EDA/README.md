@@ -118,6 +118,7 @@ qplot(x = citric.acid, data = rw)
 qplot(x = citric.acid, data = rw, binwidth = 0.01)
 ```
 ![Alt text](https://user-images.githubusercontent.com/24691702/29484104-8af4775c-846c-11e7-9604-b1e23abd2188.png)
+![Alt text](https://user-images.githubusercontent.com/24691702/29484114-d0fcede2-846c-11e7-8ba3-6c8e3e8a1993.png)
 ```
 summary(rw$citric.acid)
 ```
