@@ -315,6 +315,13 @@ ggplot(aes(x = log10(alcohol), y = quality), data = rw) +
 ![Alt text](https://user-images.githubusercontent.com/24691702/29484331-1dd82128-8471-11e7-873d-9f9bd347d535.png)
 
 Tried to fix overplotting problem, two transformations on alcohol was made. These two plots show that the overplotting cannot be easily fix only through transformations.
+```
+ggplot(aes(x = volatile.acidity, y = quality), data = rw) +
+  geom_point()
+ggplot(aes(x = volatile.acidity, y = quality), data = rw) +
+  geom_jitter(alpha = 0.3) +
+  geom_smooth(method = 'lm')
+```
 
 ![Alt text](https://user-images.githubusercontent.com/24691702/29490389-eeea6b36-84ee-11e7-8056-f3e51f0f21a5.png)
 
@@ -322,22 +329,60 @@ Tried to fix overplotting problem, two transformations on alcohol was made. Thes
 
 Comparing volatile.acidity to quality, the first plot suffers from overplotting. Most red wines have a volatile.acidity between 0.3 and 0.7. After adding jitter, transparency, let us see the slight negative correlation between volatile.acidity and quality. The correlation coefficient between these two variable is -0.39.
 
+```
+ggplot(aes(x = factor(quality), y = volatile.acidity), data = rw) +
+  geom_jitter(alpha = 0.3) +
+  geom_boxplot(alpha = 0.5, color = 'blue') +
+  stat_summary(fun.y = 'mean',
+               geom = 'point',
+               color = 'red',
+               shape = 8,
+               size = 4)
+```
+
 ![Alt text](https://user-images.githubusercontent.com/24691702/29490401-5a19ea62-84ef-11e7-8261-fabf53554418.png)
 
 This plot shows that the relationship between quality and volatile.acidity is negative. As the mean of volatile.acidity increases, the red wine quality increases.
+
+```
+ggplot(aes(x = sulphates, y = quality), data = rw) +
+  geom_jitter(alpha = 0.4) +
+  geom_smooth(method = 'lm')
+```
 
 ![Alt text](https://user-images.githubusercontent.com/24691702/29490408-86a1af84-84ef-11e7-8794-b4f7be6d0c9e.png)
 
 Majority red wine have sulphates between 0.45 and 0.75. The Adjusted R_squared is 0.06261 which means that the sulphates only explanes 6.3% about the red wine quality. The simple linear regression is not a good algorithm to apply between quality and sulphates.
 
+```
+ggplot(aes(x = factor(quality), y = sulphates), data = rw) +
+  geom_jitter(alpha = 0.3) +
+  geom_boxplot(alpha = 0.5, color = 'blue') +
+  stat_summary(fun.y = 'mean',
+               geom = 'point',
+               color = 'red',
+               shape = 8,
+               size = 4)
+```
+
 ![Alt text](https://user-images.githubusercontent.com/24691702/29490425-2787f782-84f0-11e7-9d92-5769a7eff45b.png)
 
 It can be seen that there is slightly positive relationship between quality and sulphates from the above figure.
 Next, I’ll look at how the relationship between fixed.acidity and citric.acid.
+```
+ggplot(aes(x = fixed.acidity, y = citric.acid), data = rw) +
+  geom_jitter(alpha = 0.4) +
+  geom_smooth(method = 'lm', col ='red')
+```
 ![Alt text](https://user-images.githubusercontent.com/24691702/29490414-cbd54dcc-84ef-11e7-8b6f-04f951df3acb.png)
 
 The relationship between fixed.acidity and citric.acid seems like a positive line.
 
+```
+ggplot(aes(x = volatile.acidity, y = citric.acid), data = rw) +
+  geom_jitter(alpha = 0.4) +
+  geom_smooth(method = 'lm')
+```
 ![Alt text](https://user-images.githubusercontent.com/24691702/29490428-5c2e4bf8-84f0-11e7-8fed-0861283e6b04.png)
 
 The relationship between volatile.acidity and citric.acid is a slight negative line.
@@ -367,7 +412,16 @@ The red wine quality is positively correlated with alcohol but the relationship 
 
 ### Multivariate Plots Section
 
-
+```
+ggplot(aes(x = alcohol, 
+           y = volatile.acidity  , color = factor(quality)), 
+       data = rw) +
+      geom_point(alpha = 0.8, size = 1) +
+      geom_smooth(method = "lm", se = FALSE,size=1)  +
+  scale_color_brewer(type='seq',
+                   guide=guide_legend(title='Quality'))
+```
+![Alt text](https://user-images.githubusercontent.com/24691702/29490433-e74ab51e-84f0-11e7-9ca1-b8e3efa58a10.png)
 
 This coloful plot shows us that red wine tends to have higher quality as alcohol increases in a special range of volatile.acidity. For example, the red wine quality increases as the alcohol increases from 8 to 14 for volatile.acidity in the range of 0.4 to 0.6. The plot shows that the variations of alcohol and volatile.acidity are large for quality is 8. For quality is 3, the variations of alcohol and volatile.acidity are the greatest than other qualities.
 
