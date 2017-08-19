@@ -594,13 +594,23 @@ ggplot(aes(x = alcohol, y = quality), data =rw) +
   labs(x = 'Alcohol %') +
   ggtitle('Quality by Alcohol')
 ```
+![Alt text](https://user-images.githubusercontent.com/24691702/29490481-ab6d857e-84f2-11e7-96b8-fe864748675b.png)
+
 ### Description Two
 The plot shows that the relationship between quality and alcohol is positive. As alcohol of red wine increases, the quality also increases. There are two methods to smooth this dataset. One is using linear regression, another is using loess. But there are a lot of overplotting, linear regression isn’t a good model for red wine dataset.
 
-Plot Three
+### Plot Three
 
+```
+rw$alcohol.bucket = cut(rw$alcohol,
+                            c(8, 9, 10.5, 12, 16))
 
-Description Three
+ggplot(aes(x = factor(quality), y = volatile.acidity), data = rw) + 
+   geom_boxplot(aes(fill = alcohol.bucket) ) +
+  ggtitle('Quality by volatile.acidity and alcohol')
+```
+
+### Description Three
 The boxplots clearly show that quality tends to be higher as volatile.acidity decreases and the alcohol increases. It indicates two opposite directions relationship between quality and volatile.acidity and between quality and alcohol. The correlation coefficient between quality and volatile.acidity is negative. The correlation coefficient between quality and alcohol is positive. Multiple regression can be used. We can interpret the relationship between quality with either volatile.acidity or alcohol by fixing another one.
 
 Reflection
