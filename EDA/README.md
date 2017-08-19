@@ -343,28 +343,31 @@ The relationship between fixed.acidity and citric.acid seems like a positive lin
 The relationship between volatile.acidity and citric.acid is a slight negative line.
 
 
-Bivariate Analysis
+## Bivariate Analysis
 
-Talk about some of the relationships you observed in this part of the
+### Talk about some of the relationships you observed in this part of the investigation. How did the feature(s) of interest vary with other features in the dataset?
 
-investigation. How did the feature(s) of interest vary with other features in
-
-the dataset?
 Quality correlates strongly with alcohol and volatile.acidity compring with other variables.
+
 As alcohol increases, red wine seems to have a higher quality tendency, but this tendency looks like special parabola rather than linear since there are some red wines with a low quality for the same alcohol.
+
 Volatile.acidity, another variable seems to have correlation with quality, explains 15.2% variance of quality based on Adjusted R-squared.
+
 The other variable sulphates is incorporated into the model, but it only explains 6.2 percent variance of quality based on Adjusted R-squared. In this way, we could eliminate it from the linear regression model.
+
 In this red wine quality case, the simple linear regression algorithm could not fit the data very well. We might consider other classification algorithm such as Linear Discriminant Analysis.
 
-Did you observe any interesting relationships between the other features
+### Did you observe any interesting relationships between the other features (not the main feature(s) of interest)?
 
-(not the main feature(s) of interest)?
 From the correlation matrix, there are some variables correlate to each other except quality. The correlation coefficient between fixed.acidity and citric.acid is 0.67. And the correlation coefficient between volatile.acidify and citric.acid is -0.55. We can not include all these correlated variables into the simple linear regression since there are highly correlated.
 
-What was the strongest relationship you found?
+### What was the strongest relationship you found?
+
 The red wine quality is positively correlated with alcohol but the relationship seems not to be linear. Also, the read wine quality is negatively correlated with volatile.acidity.
 
-Multivariate Plots Section
+### Multivariate Plots Section
+
+
 
 This coloful plot shows us that red wine tends to have higher quality as alcohol increases in a special range of volatile.acidity. For example, the red wine quality increases as the alcohol increases from 8 to 14 for volatile.acidity in the range of 0.4 to 0.6. The plot shows that the variations of alcohol and volatile.acidity are large for quality is 8. For quality is 3, the variations of alcohol and volatile.acidity are the greatest than other qualities.
 
