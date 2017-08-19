@@ -296,12 +296,13 @@ ggplot(aes(factor(quality),
                shape = 8, 
                size = 4)
 ```
+![Alt text](https://user-images.githubusercontent.com/24691702/29484296-65e0496a-8470-11e7-8e29-0584a248c8ab.png)
 
 This plot clearly shows that the quality increases as the mean of alcohol increases.
-## Warning in model.response(mf, "numeric"): using type = "numeric" with a
-## factor response will be ignored
-## Warning in Ops.factor(y, z$residuals): '-' not meaningful for factors
+
 The correlation coefficient between quality and alcohol is 0.48. Though there are many overplotting, I used two different methods to smooth. The green is linear regression line, the red is loess line. The Adjusted R-squared of simple linear regression is 0.2263 which means only 22.63% variation of red wine quality can be explained by alcohol. On the other hand the simple linear regression isn’t a good algorithm for red wine dataset.
+
+
 
 Tried to fix overplotting problem, two transformations on alcohol was made. These two plots show that the overplotting cannot be easily fix only through transformations.
 
