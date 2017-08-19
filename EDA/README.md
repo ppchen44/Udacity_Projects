@@ -1,6 +1,25 @@
-Pingping Chen
+# Pingping Chen
 This report explores Red wine quality with 13 attributes.
-Univariate Plots Section
+
+## Load libraries and dataset into R
+```
+library(ggplot2)
+library(GGally)
+library(psych)
+library(MASS)
+library(memisc)
+library(class)
+library(gmodels)
+library(scales)
+library(gridExtra)
+
+rw <- read.csv('wineQualityReds.csv')
+```
+## Univariate Plots Section
+```
+str(rw)
+```
+```
 ## 'data.frame':    1599 obs. of  13 variables:
 ##  $ X                   : int  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ fixed.acidity       : num  7.4 7.8 7.8 11.2 7.4 7.4 7.9 7.3 7.8 7.5 ...
@@ -15,6 +34,12 @@ Univariate Plots Section
 ##  $ sulphates           : num  0.56 0.68 0.65 0.58 0.56 0.56 0.46 0.47 0.57 0.8 ...
 ##  $ alcohol             : num  9.4 9.8 9.8 9.8 9.4 9.4 9.4 10 9.5 10.5 ...
 ##  $ quality             : int  5 5 5 6 5 5 5 7 7 5 ...
+```
+```
+summary(rw)
+rw$quality = factor(rw$quality)
+```
+```
 ##        X          fixed.acidity   volatile.acidity  citric.acid   
 ##  Min.   :   1.0   Min.   : 4.60   Min.   :0.1200   Min.   :0.000  
 ##  1st Qu.: 400.5   1st Qu.: 7.10   1st Qu.:0.3900   1st Qu.:0.090  
@@ -43,6 +68,7 @@ Univariate Plots Section
 ##  Mean   :10.42   Mean   :5.636  
 ##  3rd Qu.:11.10   3rd Qu.:6.000  
 ##  Max.   :14.90   Max.   :8.000
+```
 The dataset contains 13 variables, with 1599 observations. I changed the quality to factor. The most of Red Wine have the quality 5, 6, and 7.
 
 ## 
