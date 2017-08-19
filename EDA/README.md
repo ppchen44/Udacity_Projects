@@ -322,9 +322,10 @@ Tried to fix overplotting problem, two transformations on alcohol was made. Thes
 
 Comparing volatile.acidity to quality, the first plot suffers from overplotting. Most red wines have a volatile.acidity between 0.3 and 0.7. After adding jitter, transparency, let us see the slight negative correlation between volatile.acidity and quality. The correlation coefficient between these two variable is -0.39.
 
-
+![Alt text](https://user-images.githubusercontent.com/24691702/29490401-5a19ea62-84ef-11e7-8261-fabf53554418.png)
 
 This plot shows that the relationship between quality and volatile.acidity is negative. As the mean of volatile.acidity increases, the red wine quality increases.
+
 
 ## Warning in model.response(mf, "numeric"): using type = "numeric" with a
 ## factor response will be ignored
