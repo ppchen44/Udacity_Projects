@@ -74,7 +74,6 @@ The dataset contains 13 variables, with 1599 observations. I changed the quality
 qplot(x = quality, data = rw)
 ```
 ![Alt text](https://user-images.githubusercontent.com/24691702/29483988-144f5e5c-846a-11e7-8ae8-ee9db0c41554.png)
-
 ```
 table(rw$quality)
 summary(rw$quality)
@@ -88,6 +87,7 @@ summary(rw$quality)
 The distributions of fixed.acidity and volatile.acidity are skewed with right tail. Most Red wine have fixed.acidity between 6 and 9. The volatile.acidity of many red wine falls between 0.2 to 0.8. For the atribute of citric.acid of red wine, it has two peaks, one is at zero and another is 0.49.
 
 ![Alt text](https://user-images.githubusercontent.com/24691702/29484033-fe021e2c-846a-11e7-9bed-fa31bff1e31b.png)
+![Alt text](https://user-images.githubusercontent.com/24691702/29484046-74796e20-846b-11e7-9927-031a92c0ec20.png)
 
 ```
 summary(rw$fixed.acidity)
