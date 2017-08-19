@@ -141,9 +141,21 @@ summary(rw$residual.sugar)
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   0.900   1.900   2.200   2.539   2.600  15.500
 ```
+```
+grid.arrange(ggplot(rw, aes( x = 1, y = chlorides ) ) + 
+               geom_jitter(alpha = 0.1 ) +
+               geom_boxplot(alpha = 0.2, color = 'red' ) ,
+             ggplot(rw, aes( x   = chlorides  ) ) + 
+                   geom_histogram(bins=30 ),ncol=2)
+```
+![Alt text](https://user-images.githubusercontent.com/24691702/29484152-7e475ac8-846d-11e7-97ee-5feb111b956a.png)
+```
+summary(rw$chlorides)
+```
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ## 0.01200 0.07000 0.07900 0.08747 0.09000 0.61100
-
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    1.00    7.00   14.00   15.87   21.00   72.00
 
