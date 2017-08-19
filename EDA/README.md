@@ -96,7 +96,7 @@ summary(rw$fixed.acidity)
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    4.60    7.10    7.90    8.32    9.20   15.90
 ```
-
+![Alt text](https://user-images.githubusercontent.com/24691702/29484071-df8704fc-846b-11e7-9e4a-b63b6d739a66.png)
 ```
 summary(rw$volatile.acidity)
 ```
