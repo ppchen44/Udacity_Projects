@@ -156,9 +156,21 @@ summary(rw$chlorides)
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ## 0.01200 0.07000 0.07900 0.08747 0.09000 0.61100
 ```
+```
+grid.arrange(ggplot(rw, aes( x = 1, y = free.sulfur.dioxide ) ) + 
+               geom_jitter(alpha = 0.1 ) +
+               geom_boxplot(alpha = 0.2, color = 'red' ) ,
+             ggplot(rw, aes( x   = free.sulfur.dioxide  ) ) + 
+                   geom_histogram(bins=30 ),ncol=2)
+```
+![Alt text](https://user-images.githubusercontent.com/24691702/29484174-dd1d7e9c-846d-11e7-81d8-1ee42fefe64e.png)
+```
+summary(rw$free.sulfur.dioxide)
+```
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    1.00    7.00   14.00   15.87   21.00   72.00
-
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    6.00   22.00   38.00   46.47   62.00  289.00
 
