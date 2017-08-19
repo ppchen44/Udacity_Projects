@@ -326,11 +326,11 @@ Comparing volatile.acidity to quality, the first plot suffers from overplotting.
 
 This plot shows that the relationship between quality and volatile.acidity is negative. As the mean of volatile.acidity increases, the red wine quality increases.
 
+![Alt text](https://user-images.githubusercontent.com/24691702/29490408-86a1af84-84ef-11e7-8794-b4f7be6d0c9e.png)
 
-## Warning in model.response(mf, "numeric"): using type = "numeric" with a
-## factor response will be ignored
-## Warning in Ops.factor(y, z$residuals): '-' not meaningful for factors
 Majority red wine have sulphates between 0.45 and 0.75. The Adjusted R_squared is 0.06261 which means that the sulphates only explanes 6.3% about the red wine quality. The simple linear regression is not a good algorithm to apply between quality and sulphates.
+
+
 
 It can be seen that there is slightly positive relationship between quality and sulphates from the above figure.
 Next, I’ll look at how the relationship between fixed.acidity and citric.acid.
