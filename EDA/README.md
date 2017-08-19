@@ -80,21 +80,30 @@ table(rw$quality)
 summary(rw$quality)
 ```
 ``` 
-   3   4   5   6   7   8 
-  10  53 681 638 199  18
-  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  3.000   5.000   6.000   5.636   6.000   8.000
+##   3   4   5   6   7   8 
+##  10  53 681 638 199  18
+## Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  3.000   5.000   6.000   5.636   6.000   8.000
 ```
 The distributions of fixed.acidity and volatile.acidity are skewed with right tail. Most Red wine have fixed.acidity between 6 and 9. The volatile.acidity of many red wine falls between 0.2 to 0.8. For the atribute of citric.acid of red wine, it has two peaks, one is at zero and another is 0.49.
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
+![Alt text](https://user-images.githubusercontent.com/24691702/29484033-fe021e2c-846a-11e7-9bed-fa31bff1e31b.png)
+
+```
+summary(rw$fixed.acidity)
+```
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    4.60    7.10    7.90    8.32    9.20   15.90
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
 
+```
+summary(rw$volatile.acidity)
+```
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  0.1200  0.3900  0.5200  0.5278  0.6400  1.5800
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
 
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   0.000   0.090   0.260   0.271   0.420   1.000
