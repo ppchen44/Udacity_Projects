@@ -247,7 +247,7 @@ summary(rw$sulphates)
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  0.3300  0.5500  0.6200  0.6581  0.7300  2.0000
 ```
-The distributions of density and PH look like look symmetrically distributed but with outliers.
+The distributions of density and PH look like symmetrically distributed but with outliers.
 
 ## Univariate Analysis
 
