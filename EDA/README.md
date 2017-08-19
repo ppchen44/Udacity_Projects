@@ -133,7 +133,7 @@ grid.arrange(ggplot(rw, aes( x = 1, y = residual.sugar ) ) +
              ggplot(rw, aes( x   = residual.sugar  ) ) + 
                    geom_histogram(bins=30 ),ncol=2)
 ```
-
+![Alt text](https://user-images.githubusercontent.com/24691702/29484139-47301fde-846d-11e7-92af-ae6ec4a248a4.png)
 ```
 summary(rw$residual.sugar)
 ```
