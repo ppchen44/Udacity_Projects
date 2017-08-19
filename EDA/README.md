@@ -330,6 +330,8 @@ This plot shows that the relationship between quality and volatile.acidity is ne
 
 Majority red wine have sulphates between 0.45 and 0.75. The Adjusted R_squared is 0.06261 which means that the sulphates only explanes 6.3% about the red wine quality. The simple linear regression is not a good algorithm to apply between quality and sulphates.
 
+![Alt text](https://user-images.githubusercontent.com/24691702/29490425-2787f782-84f0-11e7-9d92-5769a7eff45b.png)
+
 It can be seen that there is slightly positive relationship between quality and sulphates from the above figure.
 Next, I’ll look at how the relationship between fixed.acidity and citric.acid.
 ![Alt text](https://user-images.githubusercontent.com/24691702/29490414-cbd54dcc-84ef-11e7-8b6f-04f951df3acb.png)
