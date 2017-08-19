@@ -579,14 +579,22 @@ Yes, I created two models with red wine dataset. One of them is linear regressio
 ```
 qplot(x = quality, data = rw, main = 'Red Wine Quality', xlab = 'Quality', ylab = 'Number of Red Wines')
 ```
+![Alt text](https://user-images.githubusercontent.com/24691702/29490468-373c50ea-84f2-11e7-81fe-fffb56243108.png)
 
-Description One
+### Description One
 There are almost 690 red wines have quality 5 and more than 600 red wines have quality 6. 200 red wines have quality 7. Majority red wine qualities are 5 and 6.
 
-Plot Two
+### Plot Two
 
-
-Description Two
+```
+ggplot(aes(x = alcohol, y = quality), data =rw) +
+  geom_jitter(alpha = 0.1) +
+  geom_smooth(method = 'loess', col = 'red') +
+  geom_smooth(method = 'lm', col = 'green') +
+  labs(x = 'Alcohol %') +
+  ggtitle('Quality by Alcohol')
+```
+### Description Two
 The plot shows that the relationship between quality and alcohol is positive. As alcohol of red wine increases, the quality also increases. There are two methods to smooth this dataset. One is using linear regression, another is using loess. But there are a lot of overplotting, linear regression isn’t a good model for red wine dataset.
 
 Plot Three
