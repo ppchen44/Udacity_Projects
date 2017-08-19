@@ -270,6 +270,10 @@ Since the distributions of free.sulfur.dioxide and total.sulfur.dioxide are high
 ## Bivariate Plots Section
 From the correlation matrix, we can see that the quality are highly correlated with volatile.acidity and alcohol. Also we could see that fixed.acidity, volatile.acidity, citric.acidity, density, and pH are correlated with each other.
 
+```
+pairs.panels(rw[c('quality', 'fixed.acidity','volatile.acidity','citric.acid','chlorides','total.sulfur.dioxide','sulphates','alcohol')])
+```
+![Alt text](https://user-images.githubusercontent.com/24691702/29484265-b93a9468-846f-11e7-88d7-f7da4a211d99.png)
 
 From the correlation plots, fixed.acidity, citric.acid, chlorides, total.sulfur.dioxide, sulphates do not seem to have strong correlations with quality. But citric.acid is correlated with volatile.acidity.
 
