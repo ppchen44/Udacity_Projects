@@ -338,7 +338,10 @@ Next, I’ll look at how the relationship between fixed.acidity and citric.acid.
 
 The relationship between fixed.acidity and citric.acid seems like a positive line.
 
+![Alt text](https://user-images.githubusercontent.com/24691702/29490428-5c2e4bf8-84f0-11e7-8fed-0861283e6b04.png)
+
 The relationship between volatile.acidity and citric.acid is a slight negative line.
+
 
 Bivariate Analysis
 
