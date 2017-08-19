@@ -118,7 +118,7 @@ fig, ax = plt.subplots(figsize = (4, 4))
 df.boxplot(['salary', 'total_payments', 'bonus', 'total_stock_value'], 'poi', ax)
 plt.show()
 ```
-https://user-images.githubusercontent.com/24691702/29483868-baeeb5ae-8466-11e7-9de0-772ae96a2173.png
+![Alt text](https://user-images.githubusercontent.com/24691702/29483868-baeeb5ae-8466-11e7-9de0-772ae96a2173.png)
 ```
 # Figure out which un-poi employee has this extreme values
 unpoi_with_extreme_values_index = df.idxmax(axis = 0)['salary']
