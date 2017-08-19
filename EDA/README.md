@@ -202,10 +202,21 @@ summary(rw$alcohol)
 ##    8.40    9.50   10.20   10.42   11.10   14.90
 ```
 The distribution of residual.sugar centered at some values and with a long right tail. And most red wines have residual.sugar between 1.4 and 3. The third quantile is 2.6, but the maximum of residual.sugar is 15.5 which indicates the distribution is highly right skewed. The distribution of chlorides has the similar shape with residual.sugar’s and majority of red wines have chlorides less than 0.09. The third quantile of free.sulfur.dioxide is 21, but the maximun is 72. Total.sulfur.dioxide has the same situation. The third quantile of total.sulfur.dioxide is 62 and the maximun is 289, the minmum is 6. The variance is huge in the total.sulfur.dioxide. The variation in the alcohol is relative smaller than other variables that we have mentioned, but there are still some outliers. In the modeling section, we could remove the outlier of alcohol is greater than 14.
-
+```
+grid.arrange(ggplot(rw, aes( x = 1, y = density ) ) + 
+               geom_jitter(alpha = 0.1 ) +
+               geom_boxplot(alpha = 0.2, color = 'red' ) ,
+             ggplot(rw, aes( x   = density  ) ) + 
+                   geom_histogram(bins=30 ),ncol=2)
+```
+![Alt text](https://user-images.githubusercontent.com/24691702/29484208-bb7bff60-846e-11e7-87e3-cab532c1e693.png)
+```
+summary(rw$density)
+```
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  0.9901  0.9956  0.9968  0.9967  0.9978  1.0040
-
+```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   2.740   3.210   3.310   3.311   3.400   4.010
 
