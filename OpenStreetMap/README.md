@@ -5,7 +5,169 @@ San Jose, CA, United States
 - https://mapzen.com/data/metro-extracts/
 - https://mapzen.com/data/metro-extracts/metro/san-jose_california/
 
-**The map is where I am living right now. I want to know what kind of data structure it is and to explore detail informations of the city.**
+**I am living San Jose right now, so I want to know what kind of data structure it is and more detail informations of the city.**
+
+## Problem Encountered in the xml map data
+After I had downloaded the data and generated a small size of data as sample, I run my Parsing_xml_Data.py. I found there are several problems.
+- Abbreviated street names.Mt 'Hamilton Rd'
+- Postcode with hype.
+- Wrong postcodes which do not belong to San Jose
+- Overrite the same informations in tags
+- Data which extracted from Tiger GPS 
+
+## Abbreviated street names
+After I had run my Parsing_xml_Data.py on my sample data, I got 'uncorrect' form of address such as ```Fountain Oaks Dr```, ```Mt Hamilton Rd``` . To deal with those type of addresses, I used function which was mentioned in Case study: OpenStreetMap Data.
+```
+def update_name(name, mapping):
+    m = street_type_re.search(name)
+    street_type = m.group()
+    if street_type not in expected:
+        if street_type in mapping.keys():
+            name = re.sub(street_type, mapping[m.group()], name)
+    return name
+ ```
+However, There was another type of address: ```'Zanker Rd., San Jose, CA'```. In order to correct this, I wrote another the below function. After I had run **audit_CA_addr()**, I got ```print 'Zanker Rd., San Jose, CA:','=>', audit_CA_addr('Zanker Rd., San Jose, CA',mapping)```
+ ```
+ def audit_CA_addr(name, mapping):
+    m = street_type_re.search(name)
+    street_type = m.group()
+    if street_type == 'CA':
+        addr_info = name.split(',')[0]
+        name = update_name(addr_info, mapping)
+    return name
+ ```
+ 
+ ## Postcode with hype and correct 'wrong' postcode
+One of address types is postcode, however, some values of postcode with hype in it. I added a if statement to find out whether the postcode value includes hype ```if re.search(hyphen, child.attrib['v']):```. Then I split this value of postcode by using ```child.attrib['v'].split('-')[0]```
+```
+                        elif child.attrib['k'].split(':', 1)[1] == 'postcode':
+                            if re.search(hyphen, child.attrib['v']):
+                                if child.attrib['v'].split('-')[0] not in zipcode_san_jose:
+                                    continue
+                                else:
+                                    node_tags_dic['id'] = element.attrib['id']
+                                    node_tags_dic['key'] = child.attrib['k'].split(':', 1)[1]
+                                    node_tags_dic['type'] = child.attrib['k'].split(':', 1)[0]
+                                    node_tags_dic['value'] = child.attrib['v'].split('-')[0]
+                            else:
+                                if child.attrib['v'] not in zipcode_san_jose:
+                                    continue
+                                else:
+                                    node_tags_dic['id'] = element.attrib['id']
+                                    node_tags_dic['key'] = child.attrib['k'].split(':', 1)[1]
+                                    node_tags_dic['type'] = child.attrib['k'].split(':', 1)[0]
+                                    node_tags_dic['value'] = child.attrib['v']
+```
+## Overrite the same informations in tags
+Street names in the second level 'k' tags pulled from Tiger GPS data and divided into segments.
+```if child.attrib['k'].split(':', 1)[0] == 'tiger':```
+
+## Data Overview
+### Files size
+san-jose_california.osm.............368.3MB                   
+nodes.csv.............................141.1MB             
+nodes_tags.csv.........................3MB                     
+ways.csv............................13.8MB                      
+ways_tags.csv.......................19.6MB                     
+ways_nodes.csv......................47.1MB                       
+
+### Number of nodes
+```sqlite> SELECT COUNT(*) FROM nodes;```
+
+1692033
+
+### Number of ways
+```sqlite> SELECT COUNT(*) FROM ways;```
+
+232001
+
+### Number of unique users
+```sqlite> SELECT COUNT(DISTINCT (e.uid)) FROM (SELECT uid FROM nodes UNION ALL SELECT uid FROM ways) e;```
+
+1374
+
+### TOP 10 contributing users
+```
+sqlite> SELECT e.user, COUNT(*) as num
+   ...> FROM (SELECT user FROM nodes UNION ALL SELECT user FROM ways) e
+   ...> GROUP BY e.user
+   ...> ORDER BY num DESC
+   ...> LIMIT 10;
+```
+```
+andygol|295555
+nmixter|284851
+mk408|147154
+Bike Mapper|91059
+samely|81073
+RichRico|76177
+dannykath|74426
+MustangBuyer|65038
+karitotp|63431
+Minh Nguyen|52974
+```
+
+### Top 10 Amenities
+```
+sqlite> SELECT e.value, COUNT(*) as num
+   ...> FROM (SELECT value FROM nodes_tags WHERE key = 'amenity' UNION ALL SELECT value FROM ways_tags WHERE key = 'amenity') e
+   ...> GROUP BY e.value
+   ...> ORDER BY num DESC
+   ...> LIMIT 10;
+```
+```
+parking|2174
+restaurant|1050
+fast_food|534
+school|533
+place_of_worship|354
+bench|332
+cafe|271
+fuel|247
+bicycle_parking|212
+toilets|205
+```
+### Most popular cuisines
+```
+sqlite> SELECT nodes_tags.value, COUNT(*) as num
+   ...> FROM nodes_tags 
+   ...>     JOIN (SELECT DISTINCT(id) FROM nodes_tags WHERE value='restaurant') i
+   ...>     ON nodes_tags.id=i.id
+   ...> WHERE nodes_tags.key='cuisine'
+   ...> GROUP BY nodes_tags.value
+   ...> ORDER BY num DESC
+   ...> LIMIT 10;
+```
+```
+vietnamese|74
+chinese|65
+mexican|61
+pizza|56
+japanese|43
+italian|31
+indian|30
+american|28
+thai|27
+sushi|23
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
