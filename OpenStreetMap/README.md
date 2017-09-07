@@ -26,6 +26,8 @@ def update_name(name, mapping):
             name = re.sub(street_type, mapping[m.group()], name)
     return name
  ```
+ ```Mt Hamilton Rd => Mt Hamilton Road```
+
 However, There was another type of address: ```'Zanker Rd., San Jose, CA'```. In order to correct this, I wrote another the below function. After I had run **audit_CA_addr()**, I got ```print 'Zanker Rd., San Jose, CA:','=>', audit_CA_addr('Zanker Rd., San Jose, CA',mapping)```
  ```
  def audit_CA_addr(name, mapping):
@@ -36,7 +38,7 @@ However, There was another type of address: ```'Zanker Rd., San Jose, CA'```. In
         name = update_name(addr_info, mapping)
     return name
  ```
- 
+``` Zanker Rd., San Jose, CA: => Zanker Road```
  ## Postcode with hype and correct 'wrong' postcode
 One of address types is postcode, however, some values of postcode with hype in it. I added a if statement to find out whether the postcode value includes hype ```if re.search(hyphen, child.attrib['v']):```. Then I split this value of postcode by using ```child.attrib['v'].split('-')[0]```
 ```
@@ -89,10 +91,10 @@ ways_nodes.csv......................47.1MB
 ### TOP 10 contributing users
 ```
 sqlite> SELECT e.user, COUNT(*) as num
-   ...> FROM (SELECT user FROM nodes UNION ALL SELECT user FROM ways) e
-   ...> GROUP BY e.user
-   ...> ORDER BY num DESC
-   ...> LIMIT 10;
+   FROM (SELECT user FROM nodes UNION ALL SELECT user FROM ways) e
+   GROUP BY e.user
+   ORDER BY num DESC
+   LIMIT 10;
 ```
 ```
 andygol|295555
@@ -106,14 +108,44 @@ MustangBuyer|65038
 karitotp|63431
 Minh Nguyen|52974
 ```
+### Top informations of San Jose
+```
+sqlite> SELECT e.key, COUNT(*) as num FROM
+   (SELECT key FROM nodes_tags UNION ALL SELECT key FROM ways_tags) e
+   GROUP BY e.key
+   ORDER BY num DESC
+   LIMIT 20;
+```
+```
+building|137091
+highway|90294
+name|49367
+county|32494
+cfcc|25619
+housenumber|22213
+street|21819
+oneway|16524
+service|16412
+lanes|15655
+reviewed|14007
+source|12213
+height|10973
+maxspeed|10903
+amenity|8052
+surface|7636
+cycleway|6262
+city|5978
+waterway|5653
+layer|5461
+```
 
 ### Top 10 Amenities
 ```
 sqlite> SELECT e.value, COUNT(*) as num
-   ...> FROM (SELECT value FROM nodes_tags WHERE key = 'amenity' UNION ALL SELECT value FROM ways_tags WHERE key = 'amenity') e
-   ...> GROUP BY e.value
-   ...> ORDER BY num DESC
-   ...> LIMIT 10;
+   FROM (SELECT value FROM nodes_tags WHERE key = 'amenity' UNION ALL SELECT value FROM ways_tags WHERE key = 'amenity') e
+   GROUP BY e.value
+   ORDER BY num DESC
+   LIMIT 10;
 ```
 ```
 parking|2174
@@ -130,13 +162,13 @@ toilets|205
 ### Most popular cuisines
 ```
 sqlite> SELECT nodes_tags.value, COUNT(*) as num
-   ...> FROM nodes_tags 
-   ...>     JOIN (SELECT DISTINCT(id) FROM nodes_tags WHERE value='restaurant') i
-   ...>     ON nodes_tags.id=i.id
-   ...> WHERE nodes_tags.key='cuisine'
-   ...> GROUP BY nodes_tags.value
-   ...> ORDER BY num DESC
-   ...> LIMIT 10;
+   FROM nodes_tags 
+   JOIN (SELECT DISTINCT(id) FROM nodes_tags WHERE value='restaurant') i
+   ON nodes_tags.id=i.id
+   WHERE nodes_tags.key='cuisine'
+   GROUP BY nodes_tags.value
+   ORDER BY num DESC
+   LIMIT 10;
 ```
 ```
 vietnamese|74
@@ -149,11 +181,39 @@ indian|30
 american|28
 thai|27
 sushi|23
+```
+## Additional Ideas
+In this map dataset, some informations are coming from tiger GPS which do not have the same format with others. Some postcodes do not belong to San Jose, but they appear in the dataset, which indicate OpenStreetMap data have some potential problems with district boundary. So many values with different format from others which make the data wrangling process more complicate. In the real word, we might need to take more time to clean data so that they can be used in further processes.
 
+### Following below ideas could be added into this report to improve.
+- Explore restaurants' names of every type of food
+For example, names of coffee house in San Jose:
+```
+sqlite> SELECT nodes_tags.value, COUNT(*) as num
+   FROM nodes_tags 
+   JOIN (SELECT DISTINCT(id) FROM nodes_tags WHERE value LIKE '%coffe%') i
+   ON nodes_tags.id=i.id
+   WHERE nodes_tags.key='name'
+   GROUP BY nodes_tags.value
+   ORDER BY num DESC
+   LIMIT 5;
+```
+```
+Starbucks|49
+Peet's Coffee & Tea|6
+Starbucks Coffee|5
+Peet's Coffee|3
+Philz Coffee|3
+```
+- From the above example, we could see that there are two different name type for Starbucks which indicate we need to do more data wrangling about the nodes_tags.value. It is not only about coffee house in San Jose, but other values as well.
 
-
-
-
+SELECT nodes_tags.value, COUNT(*) as num FROM nodes_tags
+JOIN ((SELECT DISTINCT(id) FROM nodes_tags a WHERE value = 'restaurant' 
+  JOIN (SELECT DISTINCT(id) FROM nodes_tags b WHERE value = 'chinese') ON a.id = b.id )) i
+ON nodes_tags.id = i.id
+WHERE nodes_tags.key = 'name'
+GROUP BY nodes_tags.value
+ORDER BY num DESC
 
 
 
