@@ -159,7 +159,33 @@ fuel|247
 bicycle_parking|212
 toilets|205
 ```
-### Most popular cuisines
+
+## Additional Ideas
+In this map dataset, some informations are coming from tiger GPS which do not have the same format with others. Some postcodes do not belong to San Jose, but they appear in the dataset, which indicate OpenStreetMap data have some potential problems with district boundary. So many values with different format from others which make the data wrangling process more complicate. In the real word, we might need to take more time to clean data so that they can be used in further processes.
+
+### Anticipated problems and benefits
+- Helping with marketing decisions
+
+We could investigate foods' type, name and address or coffee houses' type, name and address if we want to open another restaurant or coffee house. After investigating all these informations, we could know residents who live in San Jose like which kind of food or drinks. For example, after I had investigated coffee houses' name and how many each coffee house are in San Jose area, I would know Starbucks Coffee has higher market share than Peet's Coffee. According to the result of the most popular cuisines, we could know which type of food is welcomed by residents. All these informations would help us to make a marketing decision about restaurant. 
+#### Names of coffee house in San Jose
+```
+sqlite> SELECT nodes_tags.value, COUNT(*) as num
+   FROM nodes_tags 
+   JOIN (SELECT DISTINCT(id) FROM nodes_tags WHERE value LIKE '%coffe%') i
+   ON nodes_tags.id=i.id
+   WHERE nodes_tags.key='name'
+   GROUP BY nodes_tags.value
+   ORDER BY num DESC
+   LIMIT 5;
+```
+```
+Starbucks|49
+Peet's Coffee & Tea|6
+Starbucks Coffee|5
+Peet's Coffee|3
+Philz Coffee|3
+```
+#### Most popular cuisines
 ```
 sqlite> SELECT nodes_tags.value, COUNT(*) as num
    FROM nodes_tags 
@@ -182,46 +208,11 @@ american|28
 thai|27
 sushi|23
 ```
-## Additional Ideas
-In this map dataset, some informations are coming from tiger GPS which do not have the same format with others. Some postcodes do not belong to San Jose, but they appear in the dataset, which indicate OpenStreetMap data have some potential problems with district boundary. So many values with different format from others which make the data wrangling process more complicate. In the real word, we might need to take more time to clean data so that they can be used in further processes.
+- Simplify and correct the informations which are extracted from GPS source
+Many informations are coming from GPS which are not prepared to further analysis. Write functions to clear it and correct it.
 
-### Following below ideas could be added into this report to improve.
-- Explore restaurants' names of every type of food
-For example, names of coffee house in San Jose:
-```
-sqlite> SELECT nodes_tags.value, COUNT(*) as num
-   FROM nodes_tags 
-   JOIN (SELECT DISTINCT(id) FROM nodes_tags WHERE value LIKE '%coffe%') i
-   ON nodes_tags.id=i.id
-   WHERE nodes_tags.key='name'
-   GROUP BY nodes_tags.value
-   ORDER BY num DESC
-   LIMIT 5;
-```
-```
-Starbucks|49
-Peet's Coffee & Tea|6
-Starbucks Coffee|5
-Peet's Coffee|3
-Philz Coffee|3
-```
-- From the above example, we could see that there are two different name type for Starbucks which indicate we need to do more data wrangling about the nodes_tags.value. It is not only about coffee house in San Jose, but other values as well.
-
-SELECT nodes_tags.value, COUNT(*) as num FROM nodes_tags
-JOIN ((SELECT DISTINCT(id) FROM nodes_tags a WHERE value = 'restaurant' 
-  JOIN (SELECT DISTINCT(id) FROM nodes_tags b WHERE value = 'chinese') ON a.id = b.id )) i
-ON nodes_tags.id = i.id
-WHERE nodes_tags.key = 'name'
-GROUP BY nodes_tags.value
-ORDER BY num DESC
-
-
-
-
-
-
-
-
+## Conclusion
+After I had reviewed the data, I found that there are still have more data wrangling works to do. I have learned data extracting, wrangling, importing csv to sql database and manipulating with SQL. This is the best practice for my further works about data mining. 
 
 
 
