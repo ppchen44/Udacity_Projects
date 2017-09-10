@@ -164,25 +164,31 @@ toilets|205
 In this map dataset, some informations are coming from tiger GPS which do not have the same format with others. Some postcodes do not belong to San Jose, but they appear in the dataset, which indicate OpenStreetMap data have some potential problems with district boundary. So many values with different format from others which make the data wrangling process more complicate. In the real word, we might need to take more time to clean data so that they can be used in further processes.
 
 ### Anticipated problems and benefits
-- Improve 1: keys like 'amenity', 'suisine', 'name' could be formated in dictionary.
+- Improve 1: keys like 'amenity', 'suisine', 'name' could be formated in dictionary
+```
     { 
         'amenity': {'restaurant':[{'cuisine': ...,
                                     'name': ...}, {'cuisine': ..., 'name': ...}, ...],
                     'bus_station': [{'network': ...}],
                     ....}
      }
+```
      . Pros: It makes data logically structured and meanwhile keep all information of amenity
+     
      . Cons: It might take more time to parse the data
      
 - Improve 2: keys like 'addr:country', 'addr:state' should be transformed into 
+```
     {
         'addr': {'city': ...,
                  'country': ...,
                  'state': ...}
         ...
     }
+```
     . Pros: It makes data more readable and more logical structured and keep all information of address.
-    . Cons: It might take more time to parse the data 
+    
+    . Cons: It might take more time to parse the data. 
 
 - Helping with marketing decisions
 
