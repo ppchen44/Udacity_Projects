@@ -164,6 +164,12 @@ toilets|205
 In this map dataset, some informations are coming from tiger GPS which do not have the same format with others. Some postcodes do not belong to San Jose, but they appear in the dataset, which indicate OpenStreetMap data have some potential problems with district boundary. So many values with different format from others which make the data wrangling process more complicate. In the real word, we might need to take more time to clean data so that they can be used in further processes.
 
 ### Anticipated problems and benefits
+- Improve 1: keys like 'amenity', 'suisine', 'name' could be formated in dictionary.
+    { 
+        'amenity': 'restaurant'[{'cuisine': ...,
+                    'name': ...}, {'cuisine': ..., 'name': ...}, ...
+
+
 - Helping with marketing decisions
 
 We could investigate foods' type, name and address or coffee houses' type, name and address if we want to open another restaurant or coffee house. After investigating all these informations, we could know residents who live in San Jose like which kind of food or drinks. For example, after I had investigated coffee houses' name and how many each coffee house are in San Jose area, I would know Starbucks Coffee has higher market share than Peet's Coffee. According to the result of the most popular cuisines, we could know which type of food is welcomed by residents. All these informations would help us to make a marketing decision about restaurant. 
