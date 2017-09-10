@@ -165,8 +165,7 @@ In this map dataset, some informations are coming from tiger GPS which do not ha
 
 ### Anticipated problems and benefits
 - Improve 1: keys like 'amenity', 'suisine', 'name' could be formated in dictionary
-
-```
+    ```
     { 
         'amenity': {'restaurant':[{'cuisine': ...,
                                     'name': ...}, {'cuisine': ..., 'name': ...}, ...],
@@ -174,7 +173,7 @@ In this map dataset, some informations are coming from tiger GPS which do not ha
                     ....}
      }
 
-```
+    ```
      . Pros: It makes data logically structured and meanwhile keep all information of amenity
      
      . Cons: It might take more time to parse the data
