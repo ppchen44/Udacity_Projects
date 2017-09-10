@@ -166,9 +166,23 @@ In this map dataset, some informations are coming from tiger GPS which do not ha
 ### Anticipated problems and benefits
 - Improve 1: keys like 'amenity', 'suisine', 'name' could be formated in dictionary.
     { 
-        'amenity': 'restaurant'[{'cuisine': ...,
-                    'name': ...}, {'cuisine': ..., 'name': ...}, ...
-
+        'amenity': {'restaurant':[{'cuisine': ...,
+                                    'name': ...}, {'cuisine': ..., 'name': ...}, ...],
+                    'bus_station': [{'network': ...}],
+                    ....}
+     }
+     . Pros: It makes data logically structured and meanwhile keep all information of amenity
+     . Cons: It might take more time to parse the data
+     
+- Improve 2: keys like 'addr:country', 'addr:state' should be transformed into 
+    {
+        'addr': {'city': ...,
+                 'country': ...,
+                 'state': ...}
+        ...
+    }
+    . Pros: It makes data more readable and more logical structured and keep all information of address.
+    . Cons: It might take more time to parse the data 
 
 - Helping with marketing decisions
 
