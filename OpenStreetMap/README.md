@@ -181,14 +181,15 @@ In this map dataset, some informations are coming from tiger GPS which do not ha
      
 - Improve 2: keys like 'addr:country', 'addr:state' should be transformed into: 
 
-```
+    ```
     {
         'addr': {'city': ...,
                  'country': ...,
                  'state': ...}
         ...
     }
-    ```
+    ```   
+    
     . Pros: It makes data more readable and more logical structured and keep all information of address.
     
     . Cons: It might take more time to parse the data. 
