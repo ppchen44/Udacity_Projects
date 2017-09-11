@@ -159,43 +159,6 @@ fuel|247
 bicycle_parking|212
 toilets|205
 ```
-
-## Additional Ideas
-In this map dataset, some informations are coming from tiger GPS which do not have the same format with others. Some postcodes do not belong to San Jose, but they appear in the dataset, which indicate OpenStreetMap data have some potential problems with district boundary. So many values with different format from others which make the data wrangling process more complicate. In the real word, we might need to take more time to clean data so that they can be used in further processes.
-
-### Anticipated problems and benefits
-- Improve 1: keys like 'amenity', 'suisine', 'name' could be formated in dictionary
-    ```
-    { 
-        'amenity': {'restaurant':[{'cuisine': ...,
-                                    'name': ...}, {'cuisine': ..., 'name': ...}, ...],
-                    'bus_station': [{'network': ...}],
-                    ....}
-     }
-
-    ```
-     . Pros: It makes data logically structured and meanwhile keep all information of amenity
-     
-     . Cons: It might take more time to parse the data
-     
-- Improve 2: keys like 'addr:country', 'addr:state' should be transformed into: 
-
-    ```
-    {
-        'addr': {'city': ...,
-                 'country': ...,
-                 'state': ...}
-        ...
-    }
-    ```   
-    
-    . Pros: It makes data more readable and more logical structured and keep all information of address.
-    
-    . Cons: It might take more time to parse the data. 
-
-- Helping with marketing decisions
-
-We could investigate foods' type, name and address or coffee houses' type, name and address if we want to open another restaurant or coffee house. After investigating all these informations, we could know residents who live in San Jose like which kind of food or drinks. For example, after I had investigated coffee houses' name and how many each coffee house are in San Jose area, I would know Starbucks Coffee has higher market share than Peet's Coffee. According to the result of the most popular cuisines, we could know which type of food is welcomed by residents. All these informations would help us to make a marketing decision about restaurant. 
 #### Names of coffee house in San Jose
 ```
 sqlite> SELECT nodes_tags.value, COUNT(*) as num
@@ -237,8 +200,52 @@ american|28
 thai|27
 sushi|23
 ```
-- Simplify and correct the informations which are extracted from GPS source
-Many informations are coming from GPS which are not prepared to further analysis. Write functions to clear it and correct it.
+
+## Additional Ideas
+In this map dataset, some informations are coming from tiger GPS which do not have the same format with others. Some postcodes do not belong to San Jose, but they appear in the dataset, which indicate OpenStreetMap data have some potential problems with district boundary. So many values with different format from others which make the data wrangling process more complicate. In the real word, we might need to take more time to clean data so that they can be used in further processes.
+
+### Anticipated problems and benefits
+- Improve 1: keys like 'amenity', 'suisine', 'name' could be formated in dictionary
+    ```
+    { 
+        'amenity': {'restaurant':[{'cuisine': ...,
+                                    'name': ...}, {'cuisine': ..., 'name': ...}, ...],
+                    'bus_station': [{'network': ...}],
+                    ....}
+     }
+
+    ```
+     . Pros: It makes data logically structured and meanwhile keep all information of amenity
+     
+     . Cons: It might take more time to parse the data
+     
+- Improve 2: keys like 'addr:country', 'addr:state' should be transformed into: 
+
+    ```
+    {
+        'addr': {'city': ...,
+                 'country': ...,
+                 'state': ...}
+        ...
+    }
+    ```   
+    
+    . Pros: It makes data more readable and more logical structured and keep all information of address.
+    
+    . Cons: It might take more time to parse the data. 
+
+- Improve 3: keys like 'highway','traffic_signals', 'crossing' could be formated in dictionary
+```
+{
+    'highway':{'crossing':'zebra',
+               'traffic_signals':['signal',...],
+               ...
+               }
+}
+```
+    . Pros: It makes data more readabel and more logical structured and keep all information
+    . Cons: It might take more time to parse the data
+
 
 ## Conclusion
 After I had reviewed the data, I found that there are still have more data wrangling works to do. I have learned data extracting, wrangling, importing csv to sql database and manipulating with SQL. This is the best practice for my further works about data mining. 
